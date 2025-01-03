@@ -76,8 +76,9 @@ class Integer:
     def __to_decimal(value: str, system: int) -> int:
         letters: str = "0123456789abcdefghijklmnopqrstuvwxyz"
         r: int = 0
+        value = value.lower()
         for i, el in enumerate(value):
-            if el.lower() not in letters:
+            if el not in letters:
                 raise SymbolException(el)
             r += int(letters.index(value[::-1][i]))*system**i
         return r
@@ -119,17 +120,7 @@ class Integer:
             raise TypeError
 
         return x if x > y else y
-
-
-    @staticmethod
-    def sum(x: int, y: int) -> int:
-        '''Returns the sum of two values'''
-
-        if not isinstance(x, int) or not isinstance(y, int):
-            raise TypeError
-        
-        return x+y
-
+    
 
     @staticmethod
     def bit_count(value: int) -> int:
@@ -155,10 +146,12 @@ class Integer:
 
 
     @staticmethod
-    def convert_to_any(value: int, system: int) -> str:
+    def convert_to_any(value: int, system: int = 2) -> str:
         if not isinstance(value, int) or not isinstance(value, int):
             raise TypeError
         
+        if value == 0: return "0"
+
         letters: str = "0123456789abcdefghijklmnopqrstuvwxyz".upper()
         r: str = ""
         while value >= 1:
@@ -196,25 +189,3 @@ class Integer:
         
         return Integer.convert_to_any(value, 8)
 
-
-# Методы экземпляра класса Integer
-a: Integer = Integer(10)
-print(a.to_bin())
-print(a.to_hex())
-print(a.to_oct())
-print(a.float_value())
-print(a.get_hash_code())
-print(a.to_str())
-print(a.get_bit_count())
-
-# Статические методы класса Integer 
-print(Integer.parse_int("100"))
-print(Integer.bit_count(100))
-print(Integer.convert_to_bin(10))
-print(Integer.convert_to_oct(10))
-print(Integer.convert_to_hex(10))
-print(Integer.convert_to_any(2, 3))
-print(Integer.min(2,3))
-print(Integer.max(2,3))
-print(Integer.sum(2,3))
-print(Integer.compare(2,2))

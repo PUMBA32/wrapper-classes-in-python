@@ -1,5 +1,5 @@
 class SymbolException(Exception): 
-    def __init__(self, s: str) -> None:
+    def __init__(self, s: str = None) -> None:
         self.letters: str = "0123456789abcdefghijklmnopqrstuvwxyz"
         self.s: str = s
 
@@ -8,7 +8,7 @@ class SymbolException(Exception):
     
 
 class IntegerLimitException(Exception): 
-    def __init__(self, value: int) -> None:
+    def __init__(self, value: int = None) -> None:
         self.MAX_VALUE: int = 2147483647
         self.MIN_VALUE: int = -2147483648
         self.value: int = value
