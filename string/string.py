@@ -5,7 +5,8 @@ class String:
     def __init__(self, value: str) -> None: 
         self.value: str = value
         self.length: int = len(value)
-        self.__letters: str = "abcdefghijklmnopqrstuvwxyz"
+        self.__l_let: str = "abcdefghijklmnopqrstuvwxyz"
+        self.__u_let: str = "ABCDEFGHIJKLMNOPQRSTUVWXY"
 
 
     def __str__(self) -> str:
@@ -51,30 +52,38 @@ class String:
 
 
     def title(self) -> str: 
-        if len(self.value) == 0: return self.value
+        if len(self.value) == 0: return ""
         
         arr: List[str] = self.value.split()
         
         for i, w in enumerate(arr):
             arr_w: List[str] = list(w)
             s_n = ord(w[0])
-            if s_n != s_n-32 and w[0] in self.__letters:
+            if s_n != s_n-32 and w[0] in self.__l_let:
                 arr_w[0] = chr(s_n-32)
                 arr[i] = "".join(arr_w)
         
         return " ".join(arr)
 
 
-    def to_upper(self) -> None: ..
-    def to_lower(self) -> None: ...
-    def is_lower(self) -> bool: ...
-    def is_upper(self) -> bool: ...
-    
+    def __change_case(self, up_or_low: int = 0) -> str:
+        if len(self.value) == 0: return ""
+        arr: List[str] = list(self.value)
+
+        for i, el in enumerate(arr):
+            s_n = ord(el)
+            if el in (self.__l_let if up_or_low else self.__u_let):
+                arr[i] = chr(s_n+(-32 if up_or_low == 1 else 32))
+        
+        return "".join(arr)
+
+
+    def to_upper(self) -> str: 
+        return self.__change_case(1)
+
+
+    def to_lower(self) -> str: 
+        return self.__change_case(0)
+
 
 # ====== Static methods =================================
-
-
-print(String.title(String("")))
-print(String.title(String("123")))
-print(String.title(String("nigger")))
-print(String.title(String("nigger man")))
