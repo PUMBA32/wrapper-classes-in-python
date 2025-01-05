@@ -23,7 +23,7 @@ class Boolean:
 
 
     def to_string(self) -> str:
-        return "true" if self.value else "false"
+        return "True" if self.value else "False"
 
 
     def hash_code(self) -> int: 
@@ -89,6 +89,6 @@ class Boolean:
         if not isinstance(b, bool):
             raise TypeError
 
-        return "true" if b else "false"
+        return "True" if b else "False"
 
 
