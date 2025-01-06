@@ -16,6 +16,8 @@ class String:
 # ====== Exemplar methods =================================
     
     def split(self, sep: str = " ") -> List[str]:
+        if sep == "": return list(self.value) 
+
         result: List[str] = []
         el = ""
         i = 0
@@ -85,5 +87,3 @@ class String:
     def to_lower(self) -> str: 
         return self.__change_case(0)
 
-
-# ====== Static methods =================================
